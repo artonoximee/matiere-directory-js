@@ -5,7 +5,7 @@ fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/structures", {headers: { Au
     }
   })
   .then(function(value) {
-    document.getElementById("test").innerHTML = value;
+    document.getElementById("test").innerHTML = value.records[0].fields.name;
     console.log(value);
   })
   .catch(function(err) {
