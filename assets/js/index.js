@@ -21,7 +21,7 @@ function fetchStructures(selectedDepartment) {
 
 function lookUpDepartment(selectedDepartment, structures) {
   structures.forEach((structure) => {
-    if (structure.fields.postcode == selectedDepartment) {
+    if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
       document.getElementById("test").innerHTML = structure.fields.name;
     }
   })
