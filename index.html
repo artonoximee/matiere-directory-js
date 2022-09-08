@@ -12,12 +12,23 @@
 
   <body>
       <div class="container">
-        <select id="department" onchange="getStructures()">
-          <option value="0">Choose department</option>
-          <option value="93">93 - Seine-Saint-Denis</option>
-          <option value="75">75 - Paris</option>
-        </select>
-        <div id="results"></div>
+
+        <div class="row mt-5">
+          <div class="col-6">
+            <select id="department" onchange="getStructures()">
+              <option value="0">Choose department</option>
+              <option value="93">93 - Seine-Saint-Denis</option>
+              <option value="75">75 - Paris</option>
+            </select>
+          </div>
+          <div class="col-6">
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div id="results"></div>
+        </div>
+
       </div>
   </body>
 </html>
