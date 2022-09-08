@@ -12,9 +12,17 @@ function fetchStructures(selectedDepartment) {
       }
     })
     .then(function(value) {
-      document.getElementById("test").innerHTML = value.records[0].fields.postcode;
+      lookUpDepartment(selectedDepartment, value.records);
       console.log(value);
     })
     .catch(function(err) {
     });
+}
+
+function lookUpDepartment(selectedDepartment, structures) {
+  structures.forEach((structure) => {
+    if (structure.fields.postcode == selectedDepartment) {
+      document.getElementById("test").innerHTML = structure.fields.name;
+    }
+  })
 }
