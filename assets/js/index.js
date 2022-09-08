@@ -1,3 +1,5 @@
+const resultsContainer = document.getElementById('results');
+
 function getStructures() {
   var selectedDepartment = document.getElementById('department').value;
   // document.getElementById("test").innerHTML = selectedDepartment;
@@ -12,6 +14,7 @@ function fetchStructures(selectedDepartment) {
       }
     })
     .then(function(value) {
+      resultsContainer.innerHTML = '';
       lookUpDepartment(selectedDepartment, value.records);
       console.log(value);
     })
@@ -22,7 +25,13 @@ function fetchStructures(selectedDepartment) {
 function lookUpDepartment(selectedDepartment, structures) {
   structures.forEach((structure) => {
     if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
-      document.getElementById("test").innerHTML = structure.fields.name;
+      appendResult(structure);
     }
   })
+}
+
+function appendResult(structure) {
+  let structureContent = document.createElement('p');
+  structureContent.innerHTML = structure.fields.name;
+  resultsContainer.appendChild(structureContent);
 }
