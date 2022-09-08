@@ -1,4 +1,5 @@
 const resultsContainer = document.getElementById('results');
+const resultsTable = document.getElementById('resultsTable');
 
 function getStructures() {
   var selectedDepartment = document.getElementById('department').value;
@@ -14,7 +15,8 @@ function fetchStructures(selectedDepartment) {
       }
     })
     .then(function(value) {
-      resultsContainer.innerHTML = '';
+      resultsTable.innerHTML = '';
+      tableHeaders();
       lookUpDepartment(selectedDepartment, value.records);
       console.log(value);
     })
@@ -34,4 +36,12 @@ function appendResult(structure) {
   let structureContent = document.createElement('p');
   structureContent.innerHTML = structure.fields.name;
   resultsContainer.appendChild(structureContent);
+}
+
+function tableHeaders(){
+  const tableHeaders =  `<tr><th scope="col">Nom</th><th scope="col">Type de structure</th><th scope="col">Code postal</th><th scope="col">Ville</th></tr>`;
+  const tableHeadersContent = document.createElement('thead');
+  tableHeadersContent.innerHTML = tableHeaders;
+  resultsTable.appendChild(tableHeadersContent);
+  console.log("Hello");
 }
