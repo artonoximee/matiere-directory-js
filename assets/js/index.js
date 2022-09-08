@@ -33,15 +33,24 @@ function lookUpDepartment(selectedDepartment, structures) {
 }
 
 function appendResult(structure) {
-  let structureContent = document.createElement('p');
-  structureContent.innerHTML = structure.fields.name;
-  resultsContainer.appendChild(structureContent);
+  let structureContent = document.createElement('tbody');
+  structureContent.innerHTML = 
+    `<th scope="row" class="w-25">${structure.fields.name}</th>
+    <td class="w-25">${structure.fields.structure_class.join(' ')}</td>
+    <td class="w-25">${structure.fields.postcode}</td>
+    <td class="w-25">${structure.fields.city}</td>`;
+  resultsTable.appendChild(structureContent);
 }
 
 function tableHeaders(){
-  const tableHeaders =  `<tr><th scope="col">Nom</th><th scope="col">Type de structure</th><th scope="col">Code postal</th><th scope="col">Ville</th></tr>`;
+  const tableHeaders = 
+    `<tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Type de structure</th>
+      <th scope="col">Code postal</th>
+      <th scope="col">Ville</th>
+    </tr>`;
   const tableHeadersContent = document.createElement('thead');
   tableHeadersContent.innerHTML = tableHeaders;
   resultsTable.appendChild(tableHeadersContent);
-  console.log("Hello");
 }
