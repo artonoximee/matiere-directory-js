@@ -22,7 +22,11 @@ function addDepartmentsToSelector(departments) {
   departments.forEach((department) => {
     let opt = document.createElement('option');
     opt.value = department.num;
-    opt.innerHTML = `${department.num} - ${department.name}`;
+    if (department.num == "ALL") {
+      opt.innerHTML = `${department.name}`;
+    } else {
+      opt.innerHTML = `${department.num} - ${department.name}`;
+    }
     selectorDepartment.appendChild(opt);
   })
 }
