@@ -1,6 +1,34 @@
 const resultsContainer = document.getElementById('results');
 const resultsList = document.getElementById('resultsList');
 
+getDepartments();
+
+function getDepartments() {
+  fetch('/assets/js/departments.json')
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then(function(value) {
+      addDepartmentsToSelector(value);
+      
+    })
+    .catch(function(err) {
+    });
+}
+
+function addDepartmentsToSelector(value) {
+  console.log(value.departments[0].num)
+  //let selectorDepartment = document.getElementById('department');
+  /*departments.forEach((department) => {
+    console.log(department);
+    //let opt = document.createElement('option');
+    //opt.value = 
+  })*/
+}
+
+
 
 function getStructures() {
   var selectedDepartment = document.getElementById('department').value;
