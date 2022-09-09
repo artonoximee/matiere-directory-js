@@ -62,10 +62,9 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
 
 function appendResult(structure) {
   let structureContent = document.createElement('div');
-  structureContent.className = "card border border-1 border-secondary mt-4"
+  structureContent.className = "card border border-1 border-secondary text-bg-dark mt-4"
   structureContent.innerHTML = 
-    `<ul class="list-group list-group-flush">
-      <li class="list-group-item text-bg-dark">
+    `<div class="card-body">
       <div class="row align-items-end mt-2">
         <div class="col-md-6 col-sm-12">
           <h3>${structure.fields.name}</h5>
@@ -77,38 +76,33 @@ function appendResult(structure) {
           <h5>${structure.fields.postcode}, ${structure.fields.city}</h5>
         </div>
       </div>
-      </li>
-      <li class="list-group-item text-bg-dark">${structure.fields.description}</li>
-      <li class="list-group-item text-bg-dark">
-        <div class="row">
-          <div class="col-md-6 col-sm-12 mt-2">
-            <a href="${structure.fields.website}" target="_blank" class="btn btn-sm btn-outline-light">
-            <i class="fa-solid fa-globe"></i> ${structure.fields.website}
-            </a>
-          </div>
-          <div class="col-md-4 col-sm-6 mt-2">
-            <a href="mailto:${structure.fields.email}" target="_blank" class="btn btn-sm btn-outline-light">
-              <i class="fa-solid fa-envelope"></i> ${structure.fields.email}
-            </a>
-          </div>
-          <div class="col-md-2 col-sm-6 mt-2 text-md-end text-sm-start">
-            <a href="${structure.fields.facebook_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-facebook"></i></a>
-            <a href="${structure.fields.instagram_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-instagram"></i></a>
-            <a href="${structure.fields.twitter_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-twitter"></i></a>
-          </div>
+      <p class="text-bg-dark mt-2">${structure.fields.description}</p>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 mt-2">
+          <a href="${structure.fields.website}" target="_blank" class="btn btn-sm btn-outline-light">
+          <i class="fa-solid fa-globe"></i> ${structure.fields.website}
+          </a>
         </div>
-      </li>
-      <li class="list-group-item text-bg-dark">
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <i class="fa-solid fa-phone"></i> ${structure.fields.telephone}
-          </div>
+        <div class="col-md-4 col-sm-6 mt-2">
+          <a href="mailto:${structure.fields.email}" target="_blank" class="btn btn-sm btn-outline-light">
+            <i class="fa-solid fa-envelope"></i> ${structure.fields.email}
+          </a>
         </div>
-      </li>
-    </ul>`;
+        <div class="col-md-2 col-sm-6 mt-2 text-md-end text-sm-start">
+          <a href="${structure.fields.facebook_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-facebook"></i></a>
+          <a href="${structure.fields.instagram_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-instagram"></i></a>
+          <a href="${structure.fields.twitter_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 mt-2">
+          <i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}
+        </div>
+        <div class="col-md-6 col-sm-12 mt-2">
+          <i class="fa-solid fa-phone"></i> ${structure.fields.telephone}
+        </div>
+      </div>
+    </div>`;
   resultsList.appendChild(structureContent);
 }
 
