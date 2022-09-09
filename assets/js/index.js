@@ -67,5 +67,4 @@ function loadingPlaceholder(status) {
   } else {
     document.getElementById('loading').innerHTML = '';
   }
-  
 }
