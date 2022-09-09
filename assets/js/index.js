@@ -83,7 +83,7 @@ function appendResult(structure) {
   row1.appendChild(row1col3);
 
   let structureName = document.createElement('h3');
-  structureName.innerHTML = structure.fields.name;
+  structureName.innerHTML = `<b>${structure.fields.name}</b>`;
   row1col1.appendChild(structureName);
 
   structure.fields.structure_class.forEach((structure_class) => {
