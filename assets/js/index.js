@@ -11,24 +11,21 @@ function getDepartments() {
       }
     })
     .then(function(value) {
-      addDepartmentsToSelector(value);
-      
+      addDepartmentsToSelector(value.departments);
     })
     .catch(function(err) {
     });
 }
 
-function addDepartmentsToSelector(value) {
-  console.log(value.departments[0].num)
-  //let selectorDepartment = document.getElementById('department');
-  /*departments.forEach((department) => {
-    console.log(department);
-    //let opt = document.createElement('option');
-    //opt.value = 
-  })*/
+function addDepartmentsToSelector(departments) {
+  let selectorDepartment = document.getElementById('department');
+  departments.forEach((department) => {
+    let opt = document.createElement('option');
+    opt.value = department.num;
+    opt.innerHTML = `${department.num} - ${department.name}`;
+    selectorDepartment.appendChild(opt);
+  })
 }
-
-
 
 function getStructures() {
   var selectedDepartment = document.getElementById('department').value;
