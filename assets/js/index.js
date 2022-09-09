@@ -62,45 +62,43 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
 
 function appendResult(structure) {
   let structureContent = document.createElement('div');
-  structureContent.className = "card border border-3 mt-4"
+  structureContent.className = "card border border-1 border-secondary mt-4"
   structureContent.innerHTML = 
     `<ul class="list-group list-group-flush">
-      <li class="list-group-item">
+      <li class="list-group-item text-bg-dark">
       <div class="row align-items-end mt-2">
         <div class="col-md-6 col-sm-12">
           <h3>${structure.fields.name}</h5>
         </div>
         <div class="col-md-4 col-sm-12">
-          <h2 class="badge bg-primary">${structure.fields.structure_class}</h2>
+          <h2 class="badge text-bg-light">${structure.fields.structure_class}</h2>
         </div>
         <div class="col-md-2 col-sm-12 text-md-end text-sm-start">
           <h5>${structure.fields.postcode}, ${structure.fields.city}</h5>
         </div>
       </div>
       </li>
-      <li class="list-group-item">${structure.fields.description}</li>
-      <li class="list-group-item">
+      <li class="list-group-item text-bg-dark">${structure.fields.description}</li>
+      <li class="list-group-item text-bg-dark">
         <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <i class="fa-solid fa-globe"></i>
-            <a href="${structure.fields.website}" target="_blank">
-              ${structure.fields.website}
+          <div class="col-md-6 col-sm-12 mt-2">
+            <a href="${structure.fields.website}" target="_blank" class="btn btn-sm btn-outline-light">
+            <i class="fa-solid fa-globe"></i> ${structure.fields.website}
             </a>
           </div>
-          <div class="col-md-4 col-sm-6">
-            <i class="fa-solid fa-envelope"></i>
-            <a href="mailto:${structure.fields.email}" target="_blank">
-              ${structure.fields.email}
+          <div class="col-md-4 col-sm-6 mt-2">
+            <a href="mailto:${structure.fields.email}" target="_blank" class="btn btn-sm btn-outline-light">
+              <i class="fa-solid fa-envelope"></i> ${structure.fields.email}
             </a>
           </div>
-          <div class="col-md-2 col-sm-6 text-md-end text-sm-start">
-            <a href="${structure.fields.facebook_url}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-            <a href="${structure.fields.instagram_url}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="${structure.fields.twitter_url}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+          <div class="col-md-2 col-sm-6 mt-2 text-md-end text-sm-start">
+            <a href="${structure.fields.facebook_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-facebook"></i></a>
+            <a href="${structure.fields.instagram_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-instagram"></i></a>
+            <a href="${structure.fields.twitter_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-twitter"></i></a>
           </div>
         </div>
       </li>
-      <li class="list-group-item">
+      <li class="list-group-item text-bg-dark">
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}
@@ -116,9 +114,9 @@ function appendResult(structure) {
 
 function appendNoResult() {
   let noResultContent = document.createElement('span');
-  noResultContent.className = 'text-center'
-  noResultContent.innerHTML = `<h1><i class="fa-solid fa-face-meh-blank text-primary"></i></h1> <h3>Uh oh, il semblerait qu'aucun résultat ne corresponde à votre recherche</h3>`;
-  resultsTable.appendChild(noResultContent);
+  noResultContent.className = 'text-center text-light'
+  noResultContent.innerHTML = `<h1><i class="fa-solid fa-face-meh-blank text-secondary"></i></h1> <h3>Uh oh, il semblerait qu'aucun résultat ne corresponde à votre recherche</h3>`;
+  resultsList.appendChild(noResultContent);
 }
 
 function loadingPlaceholder(status) {
