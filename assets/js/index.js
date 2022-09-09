@@ -71,7 +71,7 @@ function appendResult(structure) {
           <h3>${structure.fields.name}</h5>
         </div>
         <div class="col-4">
-          <h2 class="badge bg-primary">${structure.fields.structure_class.join(' ')}</h2>
+          <h2 class="badge bg-primary">${structure.fields.structure_class}</h2>
         </div>
         <div class="col-2 text-end">
           <h5>${structure.fields.postcode}, ${structure.fields.city}</h5>
@@ -92,15 +92,9 @@ function appendResult(structure) {
             </a>
           </div>
           <div class="col text-end">
-            <a href="mailto:${structure.fields.facebook_url}" target="_blank">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="mailto:${structure.fields.instagram_url}" target="_blank">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="mailto:${structure.fields.twitter_url}" target="_blank">
-              <i class="fa-brands fa-twitter"></i>
-            </a>
+            <a href="mailto:${structure.fields.facebook_url}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="mailto:${structure.fields.instagram_url}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="mailto:${structure.fields.twitter_url}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
           </div>
         </div>
       </li>
