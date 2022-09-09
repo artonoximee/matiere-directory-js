@@ -18,7 +18,7 @@ function fetchStructures(selectedDepartment, selectedType) {
     })
     .then(function(value) {
       resultsTable.innerHTML = '';
-      tableHeaders();
+      //tableHeaders();
       lookUpDatabase(selectedDepartment, selectedType, value.records);
       loadingPlaceholder(false);
     })
@@ -27,30 +27,38 @@ function fetchStructures(selectedDepartment, selectedType) {
 }
 
 function lookUpDatabase(selectedDepartment, selectedType, structures) {
+  let filteredStructures = []
   if (selectedDepartment != "ALL" && selectedType != "ALL") {
     structures.forEach((structure) => {
       if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
         if (structure.fields.structure_class.includes(selectedType)) {
-          appendResult(structure);
+          filteredStructures.push(structure);
         }
       }
     })
   } else if (selectedDepartment == "ALL" && selectedType != "ALL") {
     structures.forEach((structure) => {
       if (structure.fields.structure_class.includes(selectedType)) {
-        appendResult(structure);
+        filteredStructures.push(structure);
       }
     })
   } else if (selectedDepartment != "ALL" && selectedType == "ALL") {
     structures.forEach((structure) => {
       if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
-        appendResult(structure);
+        filteredStructures.push(structure);
       }
     })
   } else {
     structures.forEach((structure) => {
-      appendResult(structure);
+      filteredStructures.push(structure);
     })
+  }
+  if (filteredStructures.length > 0) {
+    filteredStructures.forEach((filteredStructure) => {
+      appendResult(filteredStructure);
+    })
+  } else {
+    appendNoResult();
   }
 }
 
@@ -62,6 +70,13 @@ function appendResult(structure) {
     <td class="w-25">${structure.fields.postcode}</td>
     <td class="w-25">${structure.fields.city}</td>`;
   resultsTable.appendChild(structureContent);
+}
+
+function appendNoResult() {
+  let noResultContent = document.createElement('h3');
+  noResultContent.className = 'text-center'
+  noResultContent.innerHTML = `😶 Uh oh ... Il semblerait qu'aucun résultat ne corresponde à votre recherche`;
+  resultsTable.appendChild(noResultContent);
 }
 
 function tableHeaders(){
