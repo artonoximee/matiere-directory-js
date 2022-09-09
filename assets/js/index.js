@@ -72,7 +72,7 @@ function appendResult(structure) {
 function appendNoResult() {
   let noResultContent = document.createElement('span');
   noResultContent.className = 'text-center'
-  noResultContent.innerHTML = `<h1>😶</h1> <h3>Uh oh, il semblerait qu'aucun résultat ne corresponde à votre recherche</h3>`;
+  noResultContent.innerHTML = `<h1><i class="fa-solid fa-face-meh-blank text-primary"></i></h1> <h3>Uh oh, il semblerait qu'aucun résultat ne corresponde à votre recherche</h3>`;
   resultsTable.appendChild(noResultContent);
 }
 
