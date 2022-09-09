@@ -59,7 +59,7 @@ function tableHeaders(){
 
 function loadingPlaceholder(status) {
   if (status) {
-    let loadingPlaceholder = `<span class="placeholder col-12"></span>`
+    let loadingPlaceholder = `<div class="loader"></div>`
     document.getElementById('loading').innerHTML = loadingPlaceholder;
   } else {
     document.getElementById('loading').innerHTML = '';
