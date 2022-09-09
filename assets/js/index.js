@@ -62,7 +62,7 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
 
 function appendResult(structure) {
   let structureContent = document.createElement('div');
-  structureContent.className = "card border border-2 mt-4"
+  structureContent.className = "card border border-3 mt-4"
   structureContent.innerHTML = 
     `<ul class="list-group list-group-flush">
       <li class="list-group-item">
@@ -82,13 +82,15 @@ function appendResult(structure) {
       <li class="list-group-item">
         <div class="row">
           <div class="col-6">
+            <i class="fa-solid fa-globe"></i>
             <a href="${structure.fields.website}" target="_blank">
-              <i class="fa-solid fa-globe"></i> Site Internet
+              Site Internet
             </a>
           </div>
           <div class="col">
+            <i class="fa-solid fa-envelope"></i>
             <a href="mailto:${structure.fields.email}" target="_blank">
-              <i class="fa-solid fa-envelope"></i> ${structure.fields.email}
+              ${structure.fields.email}
             </a>
           </div>
           <div class="col text-end">
