@@ -66,14 +66,14 @@ function appendResult(structure) {
   structureContent.innerHTML = 
     `<ul class="list-group list-group-flush">
       <li class="list-group-item">
-      <div class="row align-items-center mt-2">
-        <div class="col-6">
+      <div class="row align-items-end mt-2">
+        <div class="col-md-6 col-sm-12">
           <h3>${structure.fields.name}</h5>
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-sm-12">
           <h2 class="badge bg-primary">${structure.fields.structure_class}</h2>
         </div>
-        <div class="col-2 text-end">
+        <div class="col-md-2 col-sm-12 text-md-end text-sm-start">
           <h5>${structure.fields.postcode}, ${structure.fields.city}</h5>
         </div>
       </div>
@@ -81,19 +81,19 @@ function appendResult(structure) {
       <li class="list-group-item">${structure.fields.description}</li>
       <li class="list-group-item">
         <div class="row">
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <i class="fa-solid fa-globe"></i>
             <a href="${structure.fields.website}" target="_blank">
               ${structure.fields.website}
             </a>
           </div>
-          <div class="col">
+          <div class="col-md-4 col-sm-6">
             <i class="fa-solid fa-envelope"></i>
             <a href="mailto:${structure.fields.email}" target="_blank">
               ${structure.fields.email}
             </a>
           </div>
-          <div class="col text-end">
+          <div class="col-md-2 col-sm-6 text-md-end text-sm-start">
             <a href="${structure.fields.facebook_url}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
             <a href="${structure.fields.instagram_url}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             <a href="${structure.fields.twitter_url}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
@@ -102,10 +102,10 @@ function appendResult(structure) {
       </li>
       <li class="list-group-item">
         <div class="row">
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}
           </div>
-          <div class="col">
+          <div class="col-md-6 col-sm-12">
             <i class="fa-solid fa-phone"></i> ${structure.fields.telephone}
           </div>
         </div>
