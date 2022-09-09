@@ -18,7 +18,6 @@ function fetchStructures(selectedDepartment, selectedType) {
     })
     .then(function(value) {
       resultsTable.innerHTML = '';
-      //tableHeaders();
       lookUpDatabase(selectedDepartment, selectedType, value.records);
       loadingPlaceholder(false);
     })
@@ -54,9 +53,7 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
     })
   }
   if (filteredStructures.length > 0) {
-    filteredStructures.forEach((filteredStructure) => {
-      appendResult(filteredStructure);
-    })
+    filteredStructures.forEach((filteredStructure) => { appendResult(filteredStructure); })
   } else {
     appendNoResult();
   }
@@ -77,19 +74,6 @@ function appendNoResult() {
   noResultContent.className = 'text-center'
   noResultContent.innerHTML = `😶 Uh oh ... Il semblerait qu'aucun résultat ne corresponde à votre recherche`;
   resultsTable.appendChild(noResultContent);
-}
-
-function tableHeaders(){
-  const tableHeaders = 
-    `<tr>
-      <th scope="col">Nom</th>
-      <th scope="col">Type de structure</th>
-      <th scope="col">Code postal</th>
-      <th scope="col">Ville</th>
-    </tr>`;
-  const tableHeadersContent = document.createElement('thead');
-  tableHeadersContent.innerHTML = tableHeaders;
-  resultsTable.appendChild(tableHeadersContent);
 }
 
 function loadingPlaceholder(status) {
