@@ -1,13 +1,14 @@
 const resultsContainer = document.getElementById('results');
 const resultsTable = document.getElementById('resultsTable');
 
+
 function getStructures() {
   var selectedDepartment = document.getElementById('department').value;
-  // document.getElementById("test").innerHTML = selectedDepartment;
   fetchStructures(selectedDepartment);
 }
 
 function fetchStructures(selectedDepartment) {
+  loadingPlaceholder(true);
   fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/structures", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }})
     .then(function(res) {
       if (res.ok) {
@@ -18,6 +19,7 @@ function fetchStructures(selectedDepartment) {
       resultsTable.innerHTML = '';
       tableHeaders();
       lookUpDepartment(selectedDepartment, value.records);
+      loadingPlaceholder(false);
       console.log(value);
     })
     .catch(function(err) {
@@ -53,4 +55,14 @@ function tableHeaders(){
   const tableHeadersContent = document.createElement('thead');
   tableHeadersContent.innerHTML = tableHeaders;
   resultsTable.appendChild(tableHeadersContent);
+}
+
+function loadingPlaceholder(status) {
+  if (status) {
+    let loadingPlaceholder = `<span class="placeholder col-12"></span>`
+    document.getElementById('loading').innerHTML = loadingPlaceholder;
+  } else {
+    document.getElementById('loading').innerHTML = '';
+  }
+  
 }
