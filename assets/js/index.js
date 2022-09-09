@@ -19,7 +19,7 @@ function fetchStructures(selectedDepartment, selectedType) {
     .then(function(value) {
       resultsTable.innerHTML = '';
       tableHeaders();
-      lookUpDepartment(selectedDepartment, selectedType, value.records);
+      lookUpDatabase(selectedDepartment, selectedType, value.records);
       loadingPlaceholder(false);
       // console.log(value);
     })
@@ -27,7 +27,7 @@ function fetchStructures(selectedDepartment, selectedType) {
     });
 }
 
-function lookUpDepartment(selectedDepartment, selectedType, structures) {
+function lookUpDatabase(selectedDepartment, selectedType, structures) {
   structures.forEach((structure) => {
     if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
       if (structure.fields.structure_class.includes(selectedType)) {
