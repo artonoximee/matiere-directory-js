@@ -95,10 +95,10 @@ function appendResult(structure) {
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-sm-12 mt-2">
+        <div class="col-md-6 col-sm-12 mt-3">
           <i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}
         </div>
-        <div class="col-md-6 col-sm-12 mt-2">
+        <div class="col-md-6 col-sm-12 mt-3">
           <i class="fa-solid fa-phone"></i> ${structure.fields.telephone}
         </div>
       </div>
