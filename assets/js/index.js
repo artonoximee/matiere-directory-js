@@ -10,7 +10,7 @@ function getStructures() {
 
 function fetchStructures(selectedDepartment, selectedType) {
   loadingPlaceholder(true);
-  fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/structures", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }})
+  fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblTGnxVLmNNpxRIH?sort%5B0%5D%5Bfield%5D=postcode&sort%5B0%5D%5Bdirection%5D=asc&sort%5B1%5D%5Bfield%5D=name&sort%5B1%5D%5Bdirection%5D=asc", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }})
     .then(function(res) {
       if (res.ok) {
         return res.json();
@@ -21,7 +21,6 @@ function fetchStructures(selectedDepartment, selectedType) {
       tableHeaders();
       lookUpDatabase(selectedDepartment, selectedType, value.records);
       loadingPlaceholder(false);
-      // console.log(value);
     })
     .catch(function(err) {
     });
