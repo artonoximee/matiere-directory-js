@@ -70,9 +70,9 @@ function appendResult(structure) {
 }
 
 function appendNoResult() {
-  let noResultContent = document.createElement('h3');
+  let noResultContent = document.createElement('span');
   noResultContent.className = 'text-center'
-  noResultContent.innerHTML = `😶 Uh oh ... Il semblerait qu'aucun résultat ne corresponde à votre recherche`;
+  noResultContent.innerHTML = `<h1>😶</h1> <h3>Uh oh, il semblerait qu'aucun résultat ne corresponde à votre recherche</h3>`;
   resultsTable.appendChild(noResultContent);
 }
 
