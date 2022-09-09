@@ -2,6 +2,7 @@ const resultsContainer = document.getElementById('results');
 const resultsList = document.getElementById('resultsList');
 
 getDepartments();
+getTypes();
 
 function getDepartments() {
   fetch('/assets/js/departments.json')
@@ -28,6 +29,30 @@ function addDepartmentsToSelector(departments) {
       opt.innerHTML = `${department.num} - ${department.name}`;
     }
     selectorDepartment.appendChild(opt);
+  })
+}
+
+function getTypes() {
+  fetch('/assets/js/types.json')
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then(function(value) {
+      addTypesToSelector(value.types);
+    })
+    .catch(function(err) {
+    });
+}
+
+function addTypesToSelector(types) {
+  let selectorType = document.getElementById('type');
+  types.forEach((type) => {
+    let opt = document.createElement('option');
+    opt.value = type.value;
+    opt.innerHTML = type.name;
+    selectorType.appendChild(opt);
   })
 }
 

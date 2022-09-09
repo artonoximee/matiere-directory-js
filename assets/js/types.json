@@ -1,40 +1,56 @@
 {
   "types":[
     {
-      "value":"Architecte"
+      "value":"ALL",
+      "name":"Tous les types de services"
     },
     {
-      "value":"Atelier Collaboratif"
+      "value":"Architecte",
+      "name":"Architecte"
     },
     {
-      "value":"Collecte"
+      "value":"Atelier Collaboratif",
+      "name":"Atelier Collaboratif"
     },
     {
-      "value":"Conseil"
+      "value":"Collecte",
+      "name":"Collecte"
     },
     {
-      "value":"Designer"
+      "value":"Conseil",
+      "name":"Conseil"
     },
     {
-      "value":"Éco-conception"
+      "value":"Designer",
+      "name":"Designer"
     },
     {
-      "value":"Fab Lab"
+      "value":"Éco-conception",
+      "name":"Éco-conception"
     },
     {
-      "value":"Formation"
+      "value":"Fab Lab",
+      "name":"Fab Lab"
     },
     {
-      "value":"Plateforme d'information"
+      "value":"Formation",
+      "name":"Formation"
     },
     {
-      "value":"Recyclerie"
+      "value":"Plateforme d'information",
+      "name":"Plateforme d'information"
     },
     {
-      "value":"Ressourcerie"
+      "value":"Recyclerie",
+      "name":"Recyclerie"
     },
     {
-      "value":"Revendeur"
+      "value":"Ressourcerie",
+      "name":"Ressourcerie"
+    },
+    {
+      "value":"Revendeur",
+      "name":"Revendeur"
     }    
   ]
 }
