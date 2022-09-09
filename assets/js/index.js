@@ -84,7 +84,7 @@ function appendResult(structure) {
           <div class="col-6">
             <i class="fa-solid fa-globe"></i>
             <a href="${structure.fields.website}" target="_blank">
-              Site Internet
+              ${structure.fields.website}
             </a>
           </div>
           <div class="col">
@@ -94,9 +94,9 @@ function appendResult(structure) {
             </a>
           </div>
           <div class="col text-end">
-            <a href="mailto:${structure.fields.facebook_url}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-            <a href="mailto:${structure.fields.instagram_url}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="mailto:${structure.fields.twitter_url}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="${structure.fields.facebook_url}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="${structure.fields.instagram_url}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="${structure.fields.twitter_url}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
           </div>
         </div>
       </li>
