@@ -5,7 +5,7 @@ getDepartments();
 getTypes();
 
 function getDepartments() {
-  fetch('/assets/js/departments.json')
+  fetch('assets/js/departments.json')
     .then(function(res) {
       if (res.ok) {
         return res.json();
@@ -33,7 +33,7 @@ function addDepartmentsToSelector(departments) {
 }
 
 function getTypes() {
-  fetch('/assets/js/types.json')
+  fetch('assets/js/types.json')
     .then(function(res) {
       if (res.ok) {
         return res.json();
