@@ -61,49 +61,129 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
 }
 
 function appendResult(structure) {
-  let structureContent = document.createElement('div');
-  structureContent.className = "card border border-1 border-secondary text-bg-dark mt-4"
-  structureContent.innerHTML = 
-    `<div class="card-body">
-      <div class="row align-items-end mt-2">
-        <div class="col-md-6 col-sm-12">
-          <h3>${structure.fields.name}</h5>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <h2 class="badge text-bg-light">${structure.fields.structure_class}</h2>
-        </div>
-        <div class="col-md-2 col-sm-12 text-md-end text-sm-start">
-          <h5>${structure.fields.postcode}, ${structure.fields.city}</h5>
-        </div>
-      </div>
-      <p class="text-bg-dark mt-2">${structure.fields.description}</p>
-      <div class="row">
-        <div class="col-md-6 col-sm-12 mt-2">
-          <a href="${structure.fields.website}" target="_blank" class="btn btn-sm btn-outline-light">
-          <i class="fa-solid fa-globe"></i> ${structure.fields.website}
-          </a>
-        </div>
-        <div class="col-md-4 col-sm-6 mt-2">
-          <a href="mailto:${structure.fields.email}" target="_blank" class="btn btn-sm btn-outline-light">
-            <i class="fa-solid fa-envelope"></i> ${structure.fields.email}
-          </a>
-        </div>
-        <div class="col-md-2 col-sm-6 mt-2 text-md-end text-sm-start">
-          <a href="${structure.fields.facebook_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-facebook"></i></a>
-          <a href="${structure.fields.instagram_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-instagram"></i></a>
-          <a href="${structure.fields.twitter_url}" target="_blank" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-twitter"></i></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-12 mt-3">
-          <i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}
-        </div>
-        <div class="col-md-6 col-sm-12 mt-3">
-          <i class="fa-solid fa-phone"></i> ${structure.fields.telephone}
-        </div>
-      </div>
-    </div>`;
-  resultsList.appendChild(structureContent);
+  let card = document.createElement('div');
+  card.className = "card border border-1 border-secondary text-bg-dark mt-4"
+
+  let cardBody = document.createElement('div');
+  cardBody.className = "card-body";
+  card.appendChild(cardBody);
+
+  let row1 = document.createElement('div')
+  row1.className = "row align-items-end mt-2";
+  cardBody.appendChild(row1);
+
+  let row1col1 = document.createElement('div');
+  row1col1.className = "col-md-6 col-sm-12";
+  let row1col2 = document.createElement('div');
+  row1col2.className = "col-md-4 col-sm-12";
+  let row1col3 = document.createElement('div');
+  row1col3.className = "col-md-2 col-sm-12 text-md-end text-sm-start";
+  row1.appendChild(row1col1);
+  row1.appendChild(row1col2);
+  row1.appendChild(row1col3);
+
+  let structureName = document.createElement('h3');
+  structureName.innerHTML = structure.fields.name;
+  row1col1.appendChild(structureName);
+
+  structure.fields.structure_class.forEach((structure_class) => {
+    let structureClass = document.createElement('h2');
+    structureClass.className = "badge text-bg-light me-2";
+    structureClass.innerHTML = structure_class;
+    row1col2.appendChild(structureClass);
+  })
+  
+  let postCodeAndCity = document.createElement('h5');
+  postCodeAndCity.innerHTML = `${structure.fields.postcode}, ${structure.fields.city}`;
+  row1col3.appendChild(postCodeAndCity);
+
+  let description = document.createElement('p');
+  description.className = "text-bg-dark mt-2";
+  description.innerHTML = structure.fields.description;
+  cardBody.appendChild(description);
+
+  let row2 = document.createElement('div');
+  row2.className = "row";
+  cardBody.appendChild(row2);
+
+  let row2col1 = document.createElement('div');
+  row2col1.className = "col-md-6 col-sm-12 mt-2";
+  let row2col2 = document.createElement('div');
+  row2col2.className = "col-md-4 col-sm-6 mt-2";
+  let row2col3 = document.createElement('div');
+  row2col3.className = "col-md-2 col-sm-6 mt-2 text-md-end text-sm-start";
+  row2.appendChild(row2col1);
+  row2.appendChild(row2col2);
+  row2.appendChild(row2col3);
+
+  if (structure.fields.website) {
+    let websiteButton = document.createElement('a');
+    websiteButton.className = "btn btn-sm btn-outline-light";
+    websiteButton.setAttribute("target", "_blank");
+    websiteButton.href = structure.fields.website;
+    websiteButton.innerHTML = `<i class="fa-solid fa-globe"></i> ${structure.fields.website}`;
+    row2col1.appendChild(websiteButton);
+  }
+
+  if (structure.fields.email) {
+    let emailButton = document.createElement('a');
+    emailButton.className = "btn btn-sm btn-outline-light";
+    emailButton.href = "mailto:" + structure.fields.email;
+    emailButton.innerHTML = `<i class="fa-solid fa-envelope"></i> ${structure.fields.email}`;
+    row2col2.appendChild(emailButton);
+  }
+
+  if (structure.fields.facebook_url) {
+    let facebookButton = document.createElement('a');
+    facebookButton.className = "btn btn-sm btn-outline-light me-2";
+    facebookButton.setAttribute("target", "_blank");
+    facebookButton.href = structure.fields.facebook_url;
+    facebookButton.innerHTML = `<i class="fa-brands fa-facebook"></i>`;
+    row2col3.appendChild(facebookButton);
+  }
+  
+  if (structure.fields.instagram_url) {
+    let instagramButton = document.createElement('a');
+    instagramButton.className = "btn btn-sm btn-outline-light me-2";
+    instagramButton.setAttribute("target", "_blank");
+    instagramButton.href = structure.fields.instagram_url;
+    instagramButton.innerHTML = `<i class="fa-brands fa-instagram"></i>`;
+    row2col3.appendChild(instagramButton);
+  }
+
+  if (structure.fields.twitter_url) {
+    let twitterButton = document.createElement('a');
+    twitterButton.className = "btn btn-sm btn-outline-light";
+    twitterButton.setAttribute("target", "_blank");
+    twitterButton.href = structure.fields.twitter_url;
+    twitterButton.innerHTML = `<i class="fa-brands fa-twitter"></i>`;
+    row2col3.appendChild(twitterButton);
+  }
+
+  let row3 = document.createElement('div');
+  row3.className = "row";
+  cardBody.appendChild(row3);
+
+  let row3col1 = document.createElement('div');
+  row3col1.className = "col-md-6 col-sm-12 mt-3";
+  let row3col2 = document.createElement('div');
+  row3col2.className = "col-md-6 col-sm-12 mt-3";
+  row3.appendChild(row3col1);
+  row3.appendChild(row3col2);
+  
+  if (structure.fields.address) {
+    let address = document.createElement('span');
+    address.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}`;
+    row3col1.appendChild(address);
+  }
+
+  if (structure.fields.telephone) {
+    let telephone = document.createElement('span');
+    telephone.innerHTML = `<i class="fa-solid fa-phone"></i> ${structure.fields.telephone}`;
+    row3col2.appendChild(telephone);
+  }
+
+  resultsList.appendChild(card);
 }
 
 function appendNoResult() {
