@@ -1,0 +1,40 @@
+{
+  "types":[
+    {
+      "value":"Architecte"
+    },
+    {
+      "value":"Atelier Collaboratif"
+    },
+    {
+      "value":"Collecte"
+    },
+    {
+      "value":"Conseil"
+    },
+    {
+      "value":"Designer"
+    },
+    {
+      "value":"Éco-conception"
+    },
+    {
+      "value":"Fab Lab"
+    },
+    {
+      "value":"Formation"
+    },
+    {
+      "value":"Plateforme d'information"
+    },
+    {
+      "value":"Recyclerie"
+    },
+    {
+      "value":"Ressourcerie"
+    },
+    {
+      "value":"Revendeur"
+    }    
+  ]
+}
