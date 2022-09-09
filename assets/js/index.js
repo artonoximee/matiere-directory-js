@@ -28,13 +28,31 @@ function fetchStructures(selectedDepartment, selectedType) {
 }
 
 function lookUpDatabase(selectedDepartment, selectedType, structures) {
-  structures.forEach((structure) => {
-    if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
+  if (selectedDepartment != "ALL" && selectedType != "ALL") {
+    structures.forEach((structure) => {
+      if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
+        if (structure.fields.structure_class.includes(selectedType)) {
+          appendResult(structure);
+        }
+      }
+    })
+  } else if (selectedDepartment == "ALL" && selectedType != "ALL") {
+    structures.forEach((structure) => {
       if (structure.fields.structure_class.includes(selectedType)) {
         appendResult(structure);
       }
-    }
-  })
+    })
+  } else if (selectedDepartment != "ALL" && selectedType == "ALL") {
+    structures.forEach((structure) => {
+      if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
+        appendResult(structure);
+      }
+    })
+  } else {
+    structures.forEach((structure) => {
+      appendResult(structure);
+    })
+  }
 }
 
 function appendResult(structure) {
