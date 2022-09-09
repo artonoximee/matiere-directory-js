@@ -4,10 +4,11 @@ const resultsTable = document.getElementById('resultsTable');
 
 function getStructures() {
   var selectedDepartment = document.getElementById('department').value;
-  fetchStructures(selectedDepartment);
+  var selectedType = document.getElementById('type').value;
+  fetchStructures(selectedDepartment, selectedType);
 }
 
-function fetchStructures(selectedDepartment) {
+function fetchStructures(selectedDepartment, selectedType) {
   loadingPlaceholder(true);
   fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/structures", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }})
     .then(function(res) {
@@ -18,18 +19,20 @@ function fetchStructures(selectedDepartment) {
     .then(function(value) {
       resultsTable.innerHTML = '';
       tableHeaders();
-      lookUpDepartment(selectedDepartment, value.records);
+      lookUpDepartment(selectedDepartment, selectedType, value.records);
       loadingPlaceholder(false);
-      console.log(value);
+      // console.log(value);
     })
     .catch(function(err) {
     });
 }
 
-function lookUpDepartment(selectedDepartment, structures) {
+function lookUpDepartment(selectedDepartment, selectedType, structures) {
   structures.forEach((structure) => {
     if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
-      appendResult(structure);
+      if (structure.fields.structure_class.includes(selectedType)) {
+        appendResult(structure);
+      }
     }
   })
 }
