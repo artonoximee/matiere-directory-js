@@ -1,5 +1,5 @@
 const resultsContainer = document.getElementById('results');
-const resultsTable = document.getElementById('resultsTable');
+const resultsList = document.getElementById('resultsList');
 
 
 function getStructures() {
@@ -17,7 +17,7 @@ function fetchStructures(selectedDepartment, selectedType) {
       }
     })
     .then(function(value) {
-      resultsTable.innerHTML = '';
+      resultsList.innerHTML = '';
       lookUpDatabase(selectedDepartment, selectedType, value.records);
       loadingPlaceholder(false);
       collapse();
@@ -61,13 +61,61 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
 }
 
 function appendResult(structure) {
-  let structureContent = document.createElement('tbody');
+  let structureContent = document.createElement('div');
+  structureContent.className = "card border border-2 mt-4"
   structureContent.innerHTML = 
-    `<th scope="row" class="w-25">${structure.fields.name}</th>
-    <td class="w-25">${structure.fields.structure_class.join(' ')}</td>
-    <td class="w-25">${structure.fields.postcode}</td>
-    <td class="w-25">${structure.fields.city}</td>`;
-  resultsTable.appendChild(structureContent);
+    `<ul class="list-group list-group-flush">
+      <li class="list-group-item">
+      <div class="row align-items-center mt-2">
+        <div class="col-6">
+          <h3>${structure.fields.name}</h5>
+        </div>
+        <div class="col-4">
+          <h2 class="badge bg-primary">${structure.fields.structure_class.join(' ')}</h2>
+        </div>
+        <div class="col-2 text-end">
+          <h5>${structure.fields.postcode}, ${structure.fields.city}</h5>
+        </div>
+      </div>
+      </li>
+      <li class="list-group-item">${structure.fields.description}</li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            <a href="${structure.fields.website}" target="_blank">
+              <i class="fa-solid fa-globe"></i> Site Internet
+            </a>
+          </div>
+          <div class="col">
+            <a href="mailto:${structure.fields.email}" target="_blank">
+              <i class="fa-solid fa-envelope"></i> ${structure.fields.email}
+            </a>
+          </div>
+          <div class="col text-end">
+            <a href="mailto:${structure.fields.facebook_url}" target="_blank">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="mailto:${structure.fields.instagram_url}" target="_blank">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="mailto:${structure.fields.twitter_url}" target="_blank">
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            <i class="fa-solid fa-location-dot"></i> ${structure.fields.address}, ${structure.fields.postcode}, ${structure.fields.city}
+          </div>
+          <div class="col">
+            <i class="fa-solid fa-phone"></i> ${structure.fields.telephone}
+          </div>
+        </div>
+      </li>
+    </ul>`;
+  resultsList.appendChild(structureContent);
 }
 
 function appendNoResult() {
