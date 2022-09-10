@@ -257,7 +257,7 @@ function loadingPlaceholder(status) {
 }
 
 function smoothScrollToResults() {
-  document.getElementById("results").scrollIntoView({ 
+  document.getElementById("scroll").scrollIntoView({ 
     behavior: 'smooth' 
   });
 }
