@@ -1,5 +1,6 @@
 const resultsContainer = document.getElementById('results');
 const resultsList = document.getElementById('resultsList');
+const resultsCountContainer = document.getElementById('resultsCount');
 
 fetchDepartments()
   .then((departments) => addDepartmentsToSelector(departments))
@@ -59,6 +60,7 @@ function fetchStructures(selectedDepartment, selectedType) {
       lookUpDatabase(selectedDepartment, selectedType, value.records);
       loadingPlaceholder(false);
       smoothScrollToResults();
+      appendResultsCount(resultsCount);
     })
     .catch(function(err) {
     });
@@ -98,12 +100,12 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
   }
 }
 
-function getStructureType(structure) {
+async function getStructureType(structure) {
   let structureTypes = []
   structure.fields.structure_types.forEach(async (structure_type) => {
     structureTypes.push(await getTypeName(structure_type).then((data) => {return data}));
-    appendResult(structure, structureTypes)
-  })
+    appendResult(structure, structureTypes);
+  });
 }
 
 async function getTypeName(recordId) {
@@ -120,7 +122,7 @@ async function getTypeName(recordId) {
 
 function appendResult(structure, structureTypes) {
   let card = document.createElement('div');
-  card.className = "card border border-1 border-secondary text-bg-dark mt-4"
+  card.className = "card reveal border border-1 border-secondary text-bg-dark mt-4"
 
   let cardBody = document.createElement('div');
   cardBody.className = "card-body";
@@ -247,7 +249,6 @@ function appendResult(structure, structureTypes) {
 
   resultsList.appendChild(card);
   resultsCount += 1;
-  console.log(resultsCount);
 }
 
 function appendNoResult() {
@@ -255,6 +256,12 @@ function appendNoResult() {
   noResultContent.className = 'text-center text-light'
   noResultContent.innerHTML = `<h1><i class="fa-solid fa-face-meh-blank text-secondary"></i></h1> <h3>Uh oh, il semblerait qu'aucun résultat ne corresponde à votre recherche</h3>`;
   resultsList.appendChild(noResultContent);
+}
+
+function appendResultsCount(count) {
+  let resultsCount = document.createElement('p');
+  resultsCount.innerHTML = count;
+  // resultsCountContainer.appendChild(resultsCount);
 }
 
 function loadingPlaceholder(status) {
