@@ -6,6 +6,8 @@ fetchDepartments()
 fetchTypes()
   .then((types) => addTypesToSelector(types))
 
+let resultsCount = 0;
+
 async function fetchDepartments() {
   const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblTbv2n4f9uhGvmM?sort%5B0%5D%5Bfield%5D=num", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
   const departments = await response.json();
@@ -36,18 +38,6 @@ function addTypesToSelector(types) {
     opt.innerHTML = type.fields.name;
     selectorType.appendChild(opt);
   })
-}
-
-async function getTypeName(recordId) {
-  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
-  const types = await response.json();
-  let getTypeName;
-  types.records.forEach((type) => {
-    if (type.id == recordId) {
-      getTypeName = type.fields.name;
-    }
-  })
-  return getTypeName;
 }
 
 function getStructures() {
@@ -102,13 +92,33 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
     })
   }
   if (filteredStructures.length > 0) {
-    filteredStructures.forEach((filteredStructure) => { appendResult(filteredStructure); })
+    filteredStructures.forEach((filteredStructure) => { getStructureType(filteredStructure); })
   } else {
     appendNoResult();
   }
 }
 
-function appendResult(structure) {
+function getStructureType(structure) {
+  let structureTypes = []
+  structure.fields.structure_types.forEach(async (structure_type) => {
+    structureTypes.push(await getTypeName(structure_type).then((data) => {return data}));
+    appendResult(structure, structureTypes)
+  })
+}
+
+async function getTypeName(recordId) {
+  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
+  const types = await response.json();
+  let getTypeName;
+  types.records.forEach((type) => {
+    if (type.id == recordId) {
+      getTypeName = type.fields.name;
+    }
+  })
+  return getTypeName;
+}
+
+function appendResult(structure, structureTypes) {
   let card = document.createElement('div');
   card.className = "card border border-1 border-secondary text-bg-dark mt-4"
 
@@ -134,10 +144,10 @@ function appendResult(structure) {
   structureName.innerHTML = `<b>${structure.fields.name}</b>`;
   row1col1.appendChild(structureName);
 
-  structure.fields.structure_types.forEach(async (structure_type) => {
+  structureTypes.forEach((structureType) => {
     let structureClass = document.createElement('h2');
     structureClass.className = "badge text-bg-light me-2";
-    structureClass.innerHTML = await getTypeName(structure_type).then((data) => {return data});
+    structureClass.innerHTML = structureType;
     row1col2.appendChild(structureClass);
   })
   
@@ -236,6 +246,8 @@ function appendResult(structure) {
   }
 
   resultsList.appendChild(card);
+  resultsCount += 1;
+  console.log(resultsCount);
 }
 
 function appendNoResult() {
