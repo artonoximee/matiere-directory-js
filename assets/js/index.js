@@ -4,6 +4,18 @@ const resultsList = document.getElementById('resultsList');
 getDepartments();
 getTypes();
 
+async function getTypeName(recordId) {
+  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
+  const types = await response.json();
+  let getTypeName;
+  types.records.forEach((type) => {
+    if (type.id == recordId) {
+      getTypeName = type.fields.name;
+    }
+  })
+  return getTypeName;
+}
+
 function getDepartments() {
   fetch('assets/js/departments.json')
     .then(function(res) {
@@ -85,14 +97,14 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
   if (selectedDepartment != "ALL" && selectedType != "ALL") {
     structures.forEach((structure) => {
       if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
-        if (structure.fields.structure_type.includes(selectedType)) {
+        if (structure.fields.structure_types.includes(selectedType)) {
           filteredStructures.push(structure);
         }
       }
     })
   } else if (selectedDepartment == "ALL" && selectedType != "ALL") {
     structures.forEach((structure) => {
-      if (structure.fields.structure_type.includes(selectedType)) {
+      if (structure.fields.structure_types.includes(selectedType)) {
         filteredStructures.push(structure);
       }
     })
@@ -140,10 +152,10 @@ function appendResult(structure) {
   structureName.innerHTML = `<b>${structure.fields.name}</b>`;
   row1col1.appendChild(structureName);
 
-  structure.fields.structure_type.forEach((structure_type) => {
+  structure.fields.structure_types.forEach(async (structure_type) => {
     let structureClass = document.createElement('h2');
     structureClass.className = "badge text-bg-light me-2";
-    structureClass.innerHTML = structure_type;
+    structureClass.innerHTML = await getTypeName(structure_type).then((data) => {return data});
     row1col2.appendChild(structureClass);
   })
   
