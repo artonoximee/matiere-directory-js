@@ -16,7 +16,7 @@ function addDepartmentsToSelector(departments) {
   let selectorDepartment = document.getElementById('department');
   departments.forEach((department) => {
     let opt = document.createElement('option');
-    opt.value = department.fields.num;
+    opt.value = department.id;
     opt.innerHTML = `${department.fields.num} - ${department.fields.name}`;
     selectorDepartment.appendChild(opt);
   })
@@ -78,7 +78,7 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
   let filteredStructures = []
   if (selectedDepartment != "ALL" && selectedType != "ALL") {
     structures.forEach((structure) => {
-      if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
+      if (structure.fields.departments == selectedDepartment) {
         if (structure.fields.structure_types.includes(selectedType)) {
           filteredStructures.push(structure);
         }
@@ -92,7 +92,7 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
     })
   } else if (selectedDepartment != "ALL" && selectedType == "ALL") {
     structures.forEach((structure) => {
-      if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
+      if (structure.fields.departments == selectedDepartment) {
         filteredStructures.push(structure);
       }
     })
