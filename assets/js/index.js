@@ -6,18 +6,6 @@ fetchDepartments()
 fetchTypes()
   .then((types) => addTypesToSelector(types))
 
-async function getTypeName(recordId) {
-  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
-  const types = await response.json();
-  let getTypeName;
-  types.records.forEach((type) => {
-    if (type.id == recordId) {
-      getTypeName = type.fields.name;
-    }
-  })
-  return getTypeName;
-}
-
 async function fetchDepartments() {
   const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblTbv2n4f9uhGvmM?sort%5B0%5D%5Bfield%5D=num", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
   const departments = await response.json();
@@ -48,6 +36,18 @@ function addTypesToSelector(types) {
     opt.innerHTML = type.fields.name;
     selectorType.appendChild(opt);
   })
+}
+
+async function getTypeName(recordId) {
+  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
+  const types = await response.json();
+  let getTypeName;
+  types.records.forEach((type) => {
+    if (type.id == recordId) {
+      getTypeName = type.fields.name;
+    }
+  })
+  return getTypeName;
 }
 
 function getStructures() {
