@@ -10,7 +10,7 @@ On this website, it has been decided to display the results from the user's quer
 
 ## Security
 
-Since this is a fully client-side website, the Airtable API Key is stored in a readable JS file. This is a major security threat. However, the main goal of this work is to work on the website's front-end side. Moreover, [this process](https://support.airtable.com/docs/creating-a-read-only-api-key), described by Airtable has been followed in order to create an API Key that has a read-only access.
+Since this is a fully client-side website, the Airtable API Key is stored in a readable JS file. This is a major security threat. However, the main goal of this experiment is to work on the website's front-end side. Moreover, [this process](https://support.airtable.com/docs/creating-a-read-only-api-key), described by Airtable has been followed in order to create an API Key that has a read-only access.
 
 ## Live version
 
