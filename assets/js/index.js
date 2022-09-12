@@ -1,8 +1,10 @@
 const resultsContainer = document.getElementById('results');
 const resultsList = document.getElementById('resultsList');
 
-getDepartments();
-getTypes();
+fetchDepartments()
+  .then((departments) => addDepartmentsToSelector(departments))
+fetchTypes()
+  .then((types) => addTypesToSelector(types))
 
 async function getTypeName(recordId) {
   const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
@@ -16,46 +18,26 @@ async function getTypeName(recordId) {
   return getTypeName;
 }
 
-function getDepartments() {
-  fetch('assets/js/departments.json')
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then(function(value) {
-      addDepartmentsToSelector(value.departments);
-    })
-    .catch(function(err) {
-    });
+async function fetchDepartments() {
+  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblTbv2n4f9uhGvmM?sort%5B0%5D%5Bfield%5D=num", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
+  const departments = await response.json();
+  return departments.records;
 }
 
 function addDepartmentsToSelector(departments) {
   let selectorDepartment = document.getElementById('department');
   departments.forEach((department) => {
     let opt = document.createElement('option');
-    opt.value = department.num;
-    if (department.num == "ALL") {
-      opt.innerHTML = `${department.name}`;
-    } else {
-      opt.innerHTML = `${department.num} - ${department.name}`;
-    }
+    opt.value = department.fields.num;
+    opt.innerHTML = `${department.fields.num} - ${department.fields.name}`;
     selectorDepartment.appendChild(opt);
   })
 }
 
-function getTypes() {
-  fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }})
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then(function(value) {
-      addTypesToSelector(value.records)
-    })
-    .catch(function(err) {
-    });
+async function fetchTypes() {
+  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
+  const types = await response.json();
+  return types.records;
 }
 
 function addTypesToSelector(types) {
