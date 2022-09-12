@@ -85,14 +85,14 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
   if (selectedDepartment != "ALL" && selectedType != "ALL") {
     structures.forEach((structure) => {
       if (structure.fields.postcode.slice(0,2) == selectedDepartment) {
-        if (structure.fields.structure_class.includes(selectedType)) {
+        if (structure.fields.structure_type.includes(selectedType)) {
           filteredStructures.push(structure);
         }
       }
     })
   } else if (selectedDepartment == "ALL" && selectedType != "ALL") {
     structures.forEach((structure) => {
-      if (structure.fields.structure_class.includes(selectedType)) {
+      if (structure.fields.structure_type.includes(selectedType)) {
         filteredStructures.push(structure);
       }
     })
@@ -140,10 +140,10 @@ function appendResult(structure) {
   structureName.innerHTML = `<b>${structure.fields.name}</b>`;
   row1col1.appendChild(structureName);
 
-  structure.fields.structure_class.forEach((structure_class) => {
+  structure.fields.structure_type.forEach((structure_type) => {
     let structureClass = document.createElement('h2');
     structureClass.className = "badge text-bg-light me-2";
-    structureClass.innerHTML = structure_class;
+    structureClass.innerHTML = structure_type;
     row1col2.appendChild(structureClass);
   })
   
