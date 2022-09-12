@@ -18,10 +18,12 @@ async function fetchDepartments() {
 function addDepartmentsToSelector(departments) {
   let selectorDepartment = document.getElementById('department');
   departments.forEach((department) => {
-    let opt = document.createElement('option');
-    opt.value = department.id;
-    opt.innerHTML = `${department.fields.num} - ${department.fields.name}`;
-    selectorDepartment.appendChild(opt);
+    if (department.fields.structures) {
+      let opt = document.createElement('option');
+      opt.value = department.id;
+      opt.innerHTML = `${department.fields.num} - ${department.fields.name}`;
+      selectorDepartment.appendChild(opt);
+    }
   })
 }
 
@@ -34,10 +36,12 @@ async function fetchTypes() {
 function addTypesToSelector(types) {
   let selectorType = document.getElementById('type');
   types.forEach((type) => {
-    let opt = document.createElement('option');
-    opt.value = type.id;
-    opt.innerHTML = type.fields.name;
-    selectorType.appendChild(opt);
+    if (type.fields.structures) {
+      let opt = document.createElement('option');
+      opt.value = type.id;
+      opt.innerHTML = type.fields.name;
+      selectorType.appendChild(opt);
+    }
   })
 }
 
