@@ -124,7 +124,6 @@ async function getStructuresType(structures) {
     structure.fields.structure_types.forEach(async (structure_type) => {
       structureTypes.push(await getTypeName(structure_type).then((data) => {return data}));
       appendResult(structure, structureTypes);
-      smoothScrollToResults()
     });
   })
 }
