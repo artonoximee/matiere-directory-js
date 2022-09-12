@@ -33,14 +33,14 @@ function addDepartmentsToSelector(departments) {
 }
 
 function getTypes() {
-  fetch('assets/js/types.json')
+  fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblgzPQXQaEUNECrc?sort%5B0%5D%5Bfield%5D=name", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }})
     .then(function(res) {
       if (res.ok) {
         return res.json();
       }
     })
     .then(function(value) {
-      addTypesToSelector(value.types);
+      addTypesToSelector(value.records)
     })
     .catch(function(err) {
     });
@@ -50,8 +50,8 @@ function addTypesToSelector(types) {
   let selectorType = document.getElementById('type');
   types.forEach((type) => {
     let opt = document.createElement('option');
-    opt.value = type.value;
-    opt.innerHTML = type.name;
+    opt.value = type.id;
+    opt.innerHTML = type.fields.name;
     selectorType.appendChild(opt);
   })
 }
