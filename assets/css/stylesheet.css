@@ -22,7 +22,7 @@
 }
 
 .reveal {
-  animation: fadein 1s ease-in;
+  animation: fadein .5s ease-in;
 }
 
 @keyframes fadein {

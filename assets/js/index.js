@@ -94,18 +94,20 @@ function lookUpDatabase(selectedDepartment, selectedType, structures) {
     })
   }
   if (filteredStructures.length > 0) {
-    filteredStructures.forEach((filteredStructure) => { getStructureType(filteredStructure); })
+    getStructuresType(filteredStructures);
   } else {
     appendNoResult();
   }
 }
 
-async function getStructureType(structure) {
-  let structureTypes = []
-  structure.fields.structure_types.forEach(async (structure_type) => {
-    structureTypes.push(await getTypeName(structure_type).then((data) => {return data}));
-    appendResult(structure, structureTypes);
-  });
+async function getStructuresType(structures) {
+  structures.forEach((structure) => {
+    let structureTypes = []
+    structure.fields.structure_types.forEach(async (structure_type) => {
+      structureTypes.push(await getTypeName(structure_type).then((data) => {return data}));
+      appendResult(structure, structureTypes);
+    });
+  })
 }
 
 async function getTypeName(recordId) {
@@ -253,15 +255,9 @@ function appendResult(structure, structureTypes) {
 
 function appendNoResult() {
   let noResultContent = document.createElement('span');
-  noResultContent.className = 'text-center text-light'
+  noResultContent.className = 'text-center text-light reveal'
   noResultContent.innerHTML = `<h1><i class="fa-solid fa-face-meh-blank text-secondary"></i></h1> <h3>Uh oh, il semblerait qu'aucun résultat ne corresponde à votre recherche</h3>`;
   resultsList.appendChild(noResultContent);
-}
-
-function appendResultsCount(count) {
-  let resultsCount = document.createElement('p');
-  resultsCount.innerHTML = count;
-  // resultsCountContainer.appendChild(resultsCount);
 }
 
 function loadingPlaceholder(status) {
@@ -273,7 +269,12 @@ function loadingPlaceholder(status) {
   }
 }
 
-function smoothScrollToResults() {
+function appendResultsCount(count) { //UNUSED
+  let resultsCount = document.createElement('p');
+  resultsCount.innerHTML = count;
+}
+
+function smoothScrollToResults(filteredStructures) { // UNUSED
   document.getElementById("scroll").scrollIntoView({ 
     behavior: 'smooth' 
   });
