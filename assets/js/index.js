@@ -175,7 +175,11 @@ function appendResult(structure) {
     websiteButton.className = "btn btn-sm btn-outline-light";
     websiteButton.setAttribute("target", "_blank");
     websiteButton.href = structure.fields.website;
-    websiteButton.innerHTML = `<i class="fa-solid fa-globe"></i> ${structure.fields.website}`;
+    if (structure.fields.website.slice(0, 8) == "https://") {
+      websiteButton.innerHTML = `<i class="fa-solid fa-globe"></i> ${structure.fields.website.slice(8, -1)}`;
+    } else {
+      websiteButton.innerHTML = `<i class="fa-solid fa-globe"></i> ${structure.fields.website.slice(7, -1)}`;
+    }
     row2col1.appendChild(websiteButton);
   }
 
@@ -207,7 +211,7 @@ function appendResult(structure) {
 
   if (structure.fields.twitter_url) {
     let twitterButton = document.createElement('a');
-    twitterButton.className = "btn btn-sm btn-outline-light";
+    twitterButton.className = "btn btn-sm btn-outline-light me-2";
     twitterButton.setAttribute("target", "_blank");
     twitterButton.href = structure.fields.twitter_url;
     twitterButton.innerHTML = `<i class="fa-brands fa-twitter"></i>`;
