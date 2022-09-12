@@ -3,11 +3,25 @@ const resultsList = document.getElementById('resultsList');
 const resultsCountContainer = document.getElementById('resultsCount');
 
 fetchDepartments()
-  .then((departments) => addDepartmentsToSelector(departments))
+  .then((departments) => addDepartmentsToSelector(departments));
 fetchTypes()
-  .then((types) => addTypesToSelector(types))
+  .then((types) => addTypesToSelector(types));
+countEntites()
+  .then((count) => addEntitiesCount(count));
 
 let resultsCount = 0;
+
+async function countEntites() {
+  const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblTGnxVLmNNpxRIH/", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
+  const entities = await response.json();
+  console.log(entities.records.length);
+  return entities.records.length;
+}
+
+function addEntitiesCount(count) {
+  let entitiesCountContainer = document.getElementById('countEntities');
+  entitiesCountContainer.innerHTML = count;
+}
 
 async function fetchDepartments() {
   const response = await fetch("https://api.airtable.com/v0/app71fe0Ff06gsUXD/tblTbv2n4f9uhGvmM?sort%5B0%5D%5Bfield%5D=num", {headers: { Authorization: 'Bearer keyEgsODRGeMoFEqh' }});
