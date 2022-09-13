@@ -189,9 +189,9 @@ function appendResult(structure, structureTypes) {
   let row2col1 = document.createElement('div');
   row2col1.className = "col-lg-6 col-md-12 mt-2";
   let row2col2 = document.createElement('div');
-  row2col2.className = "col-lg-3 col-md-6 mt-2";
+  row2col2.className = "col-lg-4 col-md-12 mt-2";
   let row2col3 = document.createElement('div');
-  row2col3.className = "col-lg-3 col-md-6 mt-2 text-lg-end text-md-start";
+  row2col3.className = "col-lg-2 col-md-12 mt-2 text-lg-end text-md-start";
   row2.appendChild(row2col1);
   row2.appendChild(row2col2);
   row2.appendChild(row2col3);
